@@ -50,7 +50,7 @@ function configure(){
     cd ../conf
     #这里面有一个zabbix_agentd.conf，这个就是zabbix-agent的配置文件我们将它copy到/ect/zzabbix/目录下面。生效的是 /etc/zabbix/zabbix_agentd.conf
     cp ../conf/zabbix_agentd.conf $configfile
-    mkdir =/var/log/zabbix/
+    mkdir /var/log/zabbix/
 
 # 设置文件权限
    
