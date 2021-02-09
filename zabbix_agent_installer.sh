@@ -1,4 +1,5 @@
 #!/bin/bash
+$configfile = '/etc/zabbix/zabbix_agentd.conf'
 
 function check(){
     netstat -ntlp | grep zabbix_agentd >/dev/null &&  echo "Exit for zabbix_agentd has been already installed." && exit
@@ -39,13 +40,14 @@ function configure(){
     #新建zabbix用户并将其加入到zabbix组，并将他设置为不可登录的类型的用户。
     #下载
     mkdir ~/zabbix-agent
+    mkdir /etc/zabbix/
     cd ~/zabbix-agent
     cp zabbix_sender zabbix_get /usr/bin
     cd ~/zabbix-agent/bin
     cp ~/zabbix-agent/bin/zabbix_agentd /usr/sbin/
     cd ../conf
     #这里面有一个zabbix_agentd.conf，这个就是zabbix-agent的配置文件我们将它copy到/ect/zzabbix/目录下面。生效的是 /etc/zabbix/zabbix_agentd.conf
-    cp ../conf/zabbix_agentd.conf  /etc/zabbix/
+    cp ../conf/zabbix_agentd.conf $configfile
     mkdir =/var/log/zabbix/
 
 # 设置文件权限
