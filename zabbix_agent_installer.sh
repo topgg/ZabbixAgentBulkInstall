@@ -1,11 +1,5 @@
 #!/bin/bash
 
-check
-checkOSdistribution
-download
-configure $1
-start
-
 function check(){
     netstat -ntlp | grep zabbix_agentd >/dev/null &&  echo "Exit for zabbix_agentd has been already installed." && exit
     test -f zabbix_agent.sh && rm -f zabbix_agent.sh
@@ -106,9 +100,13 @@ elif [ CentOS_RHEL_version -eq 6 -o CentOS_RHEL_version -eq 5 ];then
     iptables -m state -A OUTPUT -p tcp --dport 10051 -j ACCEPT
     iptables save
     iptables-restore
-zabbixagentpid=`ps aux|grep zabbix_agentd|grep -v "grep"|awk '{print $2}'`
 }
 
+check
+checkOSdistribution
+download
+configure $1
+start
 
 #启动检查
 #ps -ef | grep zabbix
