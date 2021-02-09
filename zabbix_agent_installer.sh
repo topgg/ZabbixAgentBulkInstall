@@ -28,7 +28,7 @@ fi
 }
 
 function download(){
-    if[ ! -f https://cdn.zabbix.com/zabbix/binaries/stable/5.0/5.0.8/zabbix_agent-5.0.8-linux-$Kernel_OS_VERSION-amd64-static.tar.gz ];then
+    if [ ! -f https://cdn.zabbix.com/zabbix/binaries/stable/5.0/5.0.8/zabbix_agent-5.0.8-linux-$Kernel_OS_VERSION-amd64-static.tar.gz ];then
     wget https://cdn.zabbix.com/zabbix/binaries/stable/5.0/5.0.8/zabbix_agent-5.0.8-linux-$Kernel_OS_VERSION-amd64-static.tar.gz
     fi
     tar -zxvf zabbix_agent-5.0.8-linux-$Kernel_OS_VERSION-amd64-static.tar.gz -C ~/zabbix-agent
@@ -92,18 +92,19 @@ function configure(){
 }
 
 function openfirewall(){
-if [ CentOS_RHEL_version -eq 7 ];then
-    firewall-cmd --permanent --add-port=10050-10051/tcp
-    firewall-cmd --reload
-elif [ CentOS_RHEL_version -eq 8 ];then
-    firewall-cmd --permanent --add-port=10050-10051/tcp
-    firewall-cmd --reload
-elif [ CentOS_RHEL_version -eq 6 -o CentOS_RHEL_version -eq 5 ];then
+	if [ CentOS_RHEL_version -eq 7 ];then
+	    firewall-cmd --permanent --add-port=10050-10051/tcp
+	    firewall-cmd --reload
+	elif [ CentOS_RHEL_version -eq 8 ];then
+	    firewall-cmd --permanent --add-port=10050-10051/tcp
+	    firewall-cmd --reload
+	elif [ CentOS_RHEL_version -eq 6 -o CentOS_RHEL_version -eq 5 ];then
 
-    iptables -m state -A INPUT -p tcp --dport 10050 -j ACCEPT
-    iptables -m state -A OUTPUT -p tcp --dport 10051 -j ACCEPT
-    iptables save
-    iptables-restore
+	    iptables -m state -A INPUT -p tcp --dport 10050 -j ACCEPT
+	    iptables -m state -A OUTPUT -p tcp --dport 10051 -j ACCEPT
+	    iptables save
+	    iptables-restore
+	    fi
 }
 
 check
