@@ -86,11 +86,6 @@ function configure(){
     fi
     
     }
-    
-    
-    function start(){
-    /usr/sbin/zabbix_agentd -c $configfile #启动zabbix客户端 
-}
 
 function openfirewall(){
 	if [ CentOS_RHEL_version -eq 7 ];then
@@ -108,10 +103,16 @@ function openfirewall(){
 	    fi
 }
 
+
+function start(){
+    /usr/sbin/zabbix_agentd -c $configfile #启动zabbix客户端 
+}
+
 check
 checkOSdistribution
 download
 configure $1
+openfirewall
 start
 
 #启动检查
