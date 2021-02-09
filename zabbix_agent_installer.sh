@@ -2,6 +2,7 @@
 configfile='/etc/zabbix/zabbix_agentd.conf'
 Server=$1 #Zabbix 服务器地址或者代理地址
 ServerActive=$1 #服务器地址或者代理地址或者代理地址
+rm -rf /etc/zabbix/zabbix_agentd.conf
 
 function check(){
     netstat -ntlp | grep zabbix_agentd >/dev/null &&  echo "Exit for zabbix_agentd has been already installed." && exit
