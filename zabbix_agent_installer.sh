@@ -2,6 +2,7 @@
 configfile='/etc/zabbix/zabbix_agentd.conf'
 Server=$1 #Zabbix 服务器地址或者代理地址
 ServerActive=$1 #服务器地址或者代理地址或者代理地址
+ipaddr=`ip a | grep inet | grep -v inet6 | grep -v 127 | sed 's/^[ \t]*//g' | cut -d ' ' -f2|grep -E -o "([0-9]{1,3}\.){3}[0-9]{1,3}"`
 rm -rf /etc/zabbix/zabbix_agentd.conf
 
 function check(){
