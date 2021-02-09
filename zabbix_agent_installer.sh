@@ -1,5 +1,7 @@
 #!/bin/bash
-$configfile = '/etc/zabbix/zabbix_agentd.conf'
+configfile='/etc/zabbix/zabbix_agentd.conf'
+Server=$1 #Zabbix 服务器地址或者代理地址
+ServerActive=$1 #服务器地址或者代理地址或者代理地址
 
 function check(){
     netstat -ntlp | grep zabbix_agentd >/dev/null &&  echo "Exit for zabbix_agentd has been already installed." && exit
@@ -7,7 +9,6 @@ function check(){
     test -f /usr/local/zabbix/sbin/zabbix_agentd && rm -rf /usr/local/zabbix/sbin/zabbix_agentd
 	test -f /etc/init.d/zabbix_agentd && rm -f /etc/init.d/zabbix_agentd
 }
-
 
 function checkOSdistribution(){
 
@@ -33,8 +34,7 @@ function download(){
     }
 function configure(){
     configfile = '/etc/zabbix/zabbix_agentd.conf'
-    Server=$1 #Zabbix 服务器地址或者代理地址
-    ServerActive=$1 #服务器地址或者代理地址或者代理地址
+    
     #创建zabbix用户和组
     groupadd zabbix
     useradd -g zabbix zabbix -s /sbin/nologin
