@@ -28,7 +28,7 @@ fi
 }
 
 function download(){
-    if[ ！ -f https://cdn.zabbix.com/zabbix/binaries/stable/5.0/5.0.8/zabbix_agent-5.0.8-linux-$Kernel_OS_VERSION-amd64-static.tar.gz ];then
+    if[ ! -f https://cdn.zabbix.com/zabbix/binaries/stable/5.0/5.0.8/zabbix_agent-5.0.8-linux-$Kernel_OS_VERSION-amd64-static.tar.gz ];then
     wget https://cdn.zabbix.com/zabbix/binaries/stable/5.0/5.0.8/zabbix_agent-5.0.8-linux-$Kernel_OS_VERSION-amd64-static.tar.gz
     fi
     tar -zxvf zabbix_agent-5.0.8-linux-$Kernel_OS_VERSION-amd64-static.tar.gz -C ~/zabbix-agent
