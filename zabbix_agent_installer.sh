@@ -3,7 +3,7 @@
 check
 checkOSdistribution
 download
-configure
+configure $1
 start
 
 function check(){
