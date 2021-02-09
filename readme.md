@@ -14,7 +14,7 @@
 使用方法
 ----------------------
 
-wget ....... && chmod +x file name && 
+wget https://raw.githubusercontent.com/topgg/ZabbixAgentBulkInstall/main/zabbix_agent_installer.sh -O zabbix_agent_installer.sh && chmod +x zabbix_agent_installer.sh && sh zabbix_agent_installer.sh
 
 
 更新日期， 2021/02/09
