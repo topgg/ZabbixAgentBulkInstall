@@ -46,7 +46,7 @@ function configure(){
     cd ~/zabbix-agent/bin/
     cp zabbix_sender zabbix_get /usr/bin
     cd ~/zabbix-agent/bin
-    cp ~/zabbix-agent/bin/zabbix_agentd /usr/sbin/
+    cp ~/zabbix-agent/sbin/zabbix_agentd /usr/sbin/
     cd ../conf
     #这里面有一个zabbix_agentd.conf，这个就是zabbix-agent的配置文件我们将它copy到/ect/zzabbix/目录下面。生效的是 /etc/zabbix/zabbix_agentd.conf
     cp ../conf/zabbix_agentd.conf $configfile
