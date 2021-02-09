@@ -66,7 +66,7 @@ function configure(){
     
 # 写入配置 
 
-    sed -i sed 的 -i 选项可以直接修改文件内容，这功能非常有帮助
+    #sed -i sed 的 -i 选项可以直接修改文件内容，这功能非常有帮助
     sed -i "s/^Server=127.0.0.1/Server${Server}/g" $configfile
     sed -i "s/^ServerActive=127.0.0.1/ServerActive = ${Server}/g" $configfile
     sed -i "s/^Hostname=Zabbix server/Hostname=${ipaddr}/g" $configfile
