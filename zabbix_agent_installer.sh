@@ -43,7 +43,7 @@ function configure(){
     #下载
     mkdir ~/zabbix-agent
     mkdir /etc/zabbix/
-    cd ~/zabbix-agent
+    cd ~/zabbix-agent/bin/
     cp zabbix_sender zabbix_get /usr/bin
     cd ~/zabbix-agent/bin
     cp ~/zabbix-agent/bin/zabbix_agentd /usr/sbin/
