@@ -34,7 +34,7 @@ function download(){
     tar -zxvf zabbix_agent-5.0.8-linux-$Kernel_OS_VERSION-amd64-static.tar.gz -C ~/zabbix-agent
     }
 function configure(){
-    configfile = '/etc/zabbix/zabbix_agentd.conf'
+    configfile='/etc/zabbix/zabbix_agentd.conf'
     
     #创建zabbix用户和组
     groupadd zabbix
@@ -67,7 +67,7 @@ function configure(){
 # 写入配置 
 
     sed -i sed 的 -i 选项可以直接修改文件内容，这功能非常有帮助
-    sed -i "s/^Server=127.0.0.1/Server = ${Server}/g" $configfile
+    sed -i "s/^Server=127.0.0.1/Server${Server}/g" $configfile
     sed -i "s/^ServerActive=127.0.0.1/ServerActive = ${Server}/g" $configfile
     sed -i "s/^Hostname=Zabbix server/Hostname=${ipaddr}/g" $configfile
     # 超级权限权限脚本修改 Edit the config file
