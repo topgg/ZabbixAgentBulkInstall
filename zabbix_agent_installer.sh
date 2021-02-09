@@ -59,7 +59,7 @@ function configure(){
     chmod 777 /var/log/zabbix/
     touch  /var/log/zabbix/zabbix_agentd.log
     chmod 777 /var/log/zabbix/zabbix_agentd.log
-    cp /root/zabbix-agent/sbin/zabbix_agentd /usr/sbin/
+    cp ~/zabbix-agent/sbin/zabbix_agentd /usr/sbin/
     #拷贝启动脚本
     chmod a+x /usr/sbin/zabbix_agentd
     setenforce 0
