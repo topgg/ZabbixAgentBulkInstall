@@ -9,7 +9,7 @@ function check(){
     netstat -ntlp | grep zabbix_agentd >/dev/null &&  echo "Exit for zabbix_agentd has been already installed." && exit
     test -f zabbix_agent.sh && rm -f zabbix_agent.sh
     test -f /usr/local/zabbix/sbin/zabbix_agentd && rm -rf /usr/local/zabbix/sbin/zabbix_agentd
-	test -f /etc/init.d/zabbix_agentd && rm -f /etc/init.d/zabbix_agentd
+    test -f /etc/init.d/zabbix_agentd && rm -f /etc/init.d/zabbix_agentd
 }
 
 function checkOSdistribution(){
@@ -24,9 +24,9 @@ elif [ -n "$(grep 'Amazon Linux AMI release' /etc/system-release)" -o -e /etc/sy
 	OS=CentOS
 	CentOS_RHEL_version=6
 	Kernel_OS_VERSION ='2.6.23'
-elif[ -n "$(grep 'Ubuntu 18' /etc/issue 2> /dev/null)" ];then
+elif [ -n "$(grep 'Ubuntu 18' /etc/issue 2> /dev/null)" ];then
 	OS=Ubuntu
-	Kernel_OS_VERSION= '3.0'
+	Kernel_OS_VERSION='3.0'
 fi
 }
 
@@ -90,12 +90,15 @@ function configure(){
     }
 
 function openfirewall(){
-	if [ CentOS_RHEL_version -eq 7 ];then
+	if [ "$OS" = "Ubuntu" ];then
+	    firewall-cmd --permanent --add-port=10050-10051/tcp
+	    firewall-cmd --reload
+	elif [ CentOS_RHEL_version -eq 7 ];then
 	    firewall-cmd --permanent --add-port=10050-10051/tcp
 	    firewall-cmd --reload
 	elif [ CentOS_RHEL_version -eq 8 ];then
 	    firewall-cmd --permanent --add-port=10050-10051/tcp
-	    firewall-cmd --reload
+	    firewall-cmd --reload    
 	elif [ CentOS_RHEL_version -eq 6 -o CentOS_RHEL_version -eq 5 ];then
 
 	    iptables -m state -A INPUT -p tcp --dport 10050 -j ACCEPT
