@@ -27,6 +27,7 @@ elif [ -n "$(grep 'Amazon Linux AMI release' /etc/system-release)" -o -e /etc/sy
 elif [ -n "$(grep 'Ubuntu 18' /etc/issue 2> /dev/null)" ];then
 	OS=Ubuntu
 	Kernel_OS_VERSION='3.0'
+	apt install selinux-utils
 fi
 }
 
