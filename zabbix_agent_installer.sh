@@ -20,11 +20,13 @@ if [ -n "$(grep 'Aliyun Linux release' /etc/issue)" -o -e /etc/redhat-release ];
 	[ -n "$(grep ' 7\.' /etc/redhat-release 2> /dev/null)" ] && CentOS_RHEL_version=7 && Kernel_OS_VERSION='3.0'
 	[ -n "$(grep ' 6\.' /etc/redhat-release 2> /dev/null)" -o -n "$(grep 'Aliyun Linux release6 15' /etc/issue)" ] && CentOS_RHEL_version=6 && Kernel_OS_VERSION ='2.6.23'
 	[ -n "$(grep ' 5\.' /etc/redhat-release 2> /dev/null)" -o -n "$(grep 'Aliyun Linux release5' /etc/issue)" ] && CentOS_RHEL_version=5 && Kernel_OS_VERSION='2.6'
-elif [ -n "$(grep 'Amazon Linux AMI release' /etc/system-release
-)" -o -e /etc/system-release ]; then
+elif [ -n "$(grep 'Amazon Linux AMI release' /etc/system-release)" -o -e /etc/system-release ]; then
 	OS=CentOS
 	CentOS_RHEL_version=6
 	Kernel_OS_VERSION ='2.6.23'
+elif[ -n "$(grep 'Ubuntu 18' /etc/issue 2> /dev/null)" ];then
+	OS=Ubuntu
+	Kernel_OS_VERSION= '3.0'
 fi
 }
 
