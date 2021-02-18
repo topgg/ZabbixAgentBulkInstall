@@ -47,7 +47,7 @@ function configurepermission(){
     #chmod 777 /var/log/zabbix/zabbix_agentd.log
     #拷贝启动脚本
     setenforce 0
-    }
+    
 # 写入配置 
 
     #sed -i sed 的 -i 选项可以直接修改文件内容，这功能非常有帮助
