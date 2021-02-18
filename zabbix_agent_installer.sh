@@ -104,8 +104,8 @@ function openfirewall(){
 
 	    iptables -m state -A INPUT -p tcp --dport 10050 -j ACCEPT
 	    iptables -m state -A OUTPUT -p tcp --dport 10051 -j ACCEPT
-	    iptables save
-	    iptables-restore
+	    service iptables save # /etc/rc.d/init.d/iptables save 写入 /etc/sysconfig/iptables文件 重启后还会保留。
+	    service iptables restart
 	    fi
 }
 
