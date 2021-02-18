@@ -42,34 +42,9 @@ function downloadinstall(){
     ./configure --prefix=/usr/ --enable-agent
     make && make install
     }
-function configureconf(){
-    configfile='/etc/zabbix/zabbix_agentd.conf'
-    #创建zabbix用户和组
-    groupadd zabbix
-    useradd -g zabbix zabbix -s /sbin/nologin
-    #新建zabbix用户并将其加入到zabbix组，并将他设置为不可登录的类型的用户。
-    #下载
-    mkdir ~/zabbix-agent
-    mkdir /etc/zabbix/
-    cd ~/zabbix-agent/zabbix-5.0.8/conf
-    #这里面有一个zabbix_agentd.conf，这个就是zabbix-agent的配置文件我们将它copy到/ect/zzabbix/目录下面。生效的是 /etc/zabbix/zabbix_agentd.conf
-    cp ~/zabbix-agent/zabbix-5.0.8/conf/zabbix_agentd.conf $configfile
-    }
-
-# 设置文件权限
-function configurepermission(){
-
-    mkdir /var/log/zabbix/ && chown zabbix:zabbix /var/log/zabbix/ && chmod 777 /var/log/zabbix/ && touch  /var/log/zabbix/zabbix_agentd.log && chmod 777 /var/log/zabbix/zabbix_agentd.log
-    #创建/var/log/zabbix/并给予权限。
-    #chown zabbix:zabbix /var/log/zabbix/
-    #chmod 777 /var/log/zabbix/
-    #touch  /var/log/zabbix/zabbix_agentd.log
-    #chmod 777 /var/log/zabbix/zabbix_agentd.log
-    #拷贝启动脚本
-    setenforce 0
     
-# 写入配置 
-
+function configureconf(){
+    
     #sed -i sed 的 -i 选项可以直接修改文件内容，这功能非常有帮助
     sed -i "s/^Server=127.0.0.1/Server = ${Server}/g" $configfile
     sed -i "s/^ServerActive=127.0.0.1/ServerActive = ${Server}/g" $configfile
@@ -88,6 +63,31 @@ function configurepermission(){
     	echo "Defaults		visiblepw" >> /etc/sudoers
     fi
     
+    }
+
+# 设置文件权限
+function configurepermission(){
+    setenforce 0
+    mkdir /var/log/zabbix/ && chown zabbix:zabbix /var/log/zabbix/ && chmod 777 /var/log/zabbix/ && touch  /var/log/zabbix/zabbix_agentd.log && chmod 777 /var/log/zabbix/zabbix_agentd.log
+    #创建/var/log/zabbix/并给予权限。
+    #chown zabbix:zabbix /var/log/zabbix/
+    #chmod 777 /var/log/zabbix/
+    #touch  /var/log/zabbix/zabbix_agentd.log
+    #chmod 777 /var/log/zabbix/zabbix_agentd.log
+    #拷贝启动脚本
+    configfile='/etc/zabbix/zabbix_agentd.conf'
+    #创建zabbix用户和组
+    groupadd zabbix
+    useradd -g zabbix zabbix -s /sbin/nologin
+    #新建zabbix用户并将其加入到zabbix组，并将他设置为不可登录的类型的用户。
+    #下载
+    mkdir ~/zabbix-agent
+    mkdir /etc/zabbix/
+    cd ~/zabbix-agent/zabbix-5.0.8/conf
+    #这里面有一个zabbix_agentd.conf，这个就是zabbix-agent的配置文件我们将它copy到/ect/zzabbix/目录下面。生效的是 /etc/zabbix/zabbix_agentd.conf
+    cp ~/zabbix-agent/zabbix-5.0.8/conf/zabbix_agentd.conf $configfile
+    
+# 写入配置 
     }
 
 function openfirewall(){
