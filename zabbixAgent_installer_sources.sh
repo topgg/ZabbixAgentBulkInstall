@@ -39,7 +39,7 @@ function downloadinstall(){
     fi
     tar -zxvf zabbix-5.0.8.tar.gz -C ~/zabbix-agent
     cd ~/zabbix-agent/zabbix-5.0.8
-    ./configure --prefix=/usr/sbin/ --enable-agent
+    ./configure --prefix=/usr/ --enable-agent
     make && make install
     }
 function configureconf(){
