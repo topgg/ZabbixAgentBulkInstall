@@ -18,7 +18,7 @@ function downloadinstall(){
     wget https://cdn.zabbix.com/zabbix/sources/stable/5.0/zabbix-5.0.8.tar.gz -O zabbix-5.0.8.tar.gz
     fi
     tar -zxvf zabbix-5.0.8.tar.gz -C ~/zabbix-agent
-    cd zabbix-agent
+    cd ~/zabbix-agent/zabbix-5.0.8
     ./configure --prefix=/usr/sbin/ --enable-agent
     make install
     }
@@ -31,15 +31,15 @@ function configureconf(){
     #下载
     mkdir ~/zabbix-agent
     mkdir /etc/zabbix/
-    cd ~/zabbix-agent/conf
+    cd ~/zabbix-agent/zabbix-5.0.8/conf
     #这里面有一个zabbix_agentd.conf，这个就是zabbix-agent的配置文件我们将它copy到/ect/zzabbix/目录下面。生效的是 /etc/zabbix/zabbix_agentd.conf
-    cp ../conf/zabbix_agentd.conf $configfile
+    cp ~/zabbix-agent/zabbix-5.0.8/conf/zabbix_agentd.conf $configfile
+    }
 
 # 设置文件权限
 function configurepermission(){
 
     mkdir /var/log/zabbix/ && chown zabbix:zabbix /var/log/zabbix/ && chmod 777 /var/log/zabbix/ && touch  /var/log/zabbix/zabbix_agentd.log && chmod 777 /var/log/zabbix/zabbix_agentd.log
-
     #创建/var/log/zabbix/并给予权限。
     #chown zabbix:zabbix /var/log/zabbix/
     #chmod 777 /var/log/zabbix/
