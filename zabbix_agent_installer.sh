@@ -94,13 +94,13 @@ function openfirewall(){
 	if [ "$OS" = "Ubuntu" ];then
 	    firewall-cmd --permanent --add-port=10050-10051/tcp
 	    firewall-cmd --reload
-	elif [ CentOS_RHEL_version -eq 7 ];then
+	elif [ $CentOS_RHEL_version -eq 7 ];then
 	    firewall-cmd --permanent --add-port=10050-10051/tcp
 	    firewall-cmd --reload
-	elif [ CentOS_RHEL_version -eq 8 ];then
+	elif [ $CentOS_RHEL_version -eq 8 ];then
 	    firewall-cmd --permanent --add-port=10050-10051/tcp
 	    firewall-cmd --reload    
-	elif [ CentOS_RHEL_version -eq 6 -o CentOS_RHEL_version -eq 5 ];then
+	elif [ $CentOS_RHEL_version -eq 6 -o $CentOS_RHEL_version -eq 5 ];then
 
 	    iptables -m state -A INPUT -p tcp --dport 10050 -j ACCEPT
 	    iptables -m state -A OUTPUT -p tcp --dport 10051 -j ACCEPT
