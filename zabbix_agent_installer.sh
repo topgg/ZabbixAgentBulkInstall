@@ -102,8 +102,8 @@ function openfirewall(){
 	    firewall-cmd --reload    
 	elif [ $CentOS_RHEL_version -eq 6 -o $CentOS_RHEL_version -eq 5 ];then
 
-	    iptables -m state -A INPUT -p tcp --dport 10050 -j ACCEPT
-	    iptables -m state -A OUTPUT -p tcp --dport 10051 -j ACCEPT
+	    iptables -m state --state ESTABLISHED,RELATED -A INPUT -p tcp --dport 10050 -j ACCEPT
+	    iptables -m state --state ESTABLISHED,RELATED -A OUTPUT -p tcp --dport 10051 -j ACCEPT
 	    service iptables save # /etc/rc.d/init.d/iptables save 写入 /etc/sysconfig/iptables文件 重启后还会保留。
 	    service iptables restart
 	    fi
