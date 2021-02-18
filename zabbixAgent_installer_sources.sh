@@ -6,11 +6,33 @@ ServerActive=$1 #服务器地址或者代理地址或者代理地址
 ipaddr=`ip a | grep inet | grep -v inet6 | grep -v 127 | sed 's/^[ \t]*//g' | cut -d ' ' -f2|grep -E -o "([0-9]{1,3}\.){3}[0-9]{1,3}"`
 rm -rf /etc/zabbix/zabbix_agentd.conf
 
+
+
+
 function check(){
     netstat -ntlp | grep zabbix_agentd >/dev/null &&  echo "Exit for zabbix_agentd has been already installed." && exit
     test -f zabbix_agent.sh && rm -f zabbix_agent.sh
     test -f /usr/local/zabbix/sbin/zabbix_agentd && rm -rf /usr/local/zabbix/sbin/zabbix_agentd
     test -f /etc/init.d/zabbix_agentd && rm -f /etc/init.d/zabbix_agentd
+}
+
+function checkOSdistribution(){
+
+if [ -n "$(grep 'Aliyun Linux release' /etc/issue)" -o -e /etc/redhat-release ]; then
+	OS=CentOS
+    [ -n "$(grep ' 8\.' /etc/redhat-release 2> /dev/null)" ] && CentOS_RHEL_version=8 && Kernel_OS_VERSION='4'
+	[ -n "$(grep ' 7\.' /etc/redhat-release 2> /dev/null)" ] && CentOS_RHEL_version=7 && Kernel_OS_VERSION='3.0'
+	[ -n "$(grep ' 6\.' /etc/redhat-release 2> /dev/null)" -o -n "$(grep 'Aliyun Linux release6 15' /etc/issue)" ] && CentOS_RHEL_version=6 && Kernel_OS_VERSION='2.6.23'
+	[ -n "$(grep ' 5\.' /etc/redhat-release 2> /dev/null)" -o -n "$(grep 'Aliyun Linux release5' /etc/issue)" ] && CentOS_RHEL_version=5 && Kernel_OS_VERSION='2.6'
+elif [ -n "$(grep 'Amazon Linux AMI release' /etc/system-release)" -o -e /etc/system-release ]; then
+	OS=CentOS
+	CentOS_RHEL_version=6
+	Kernel_OS_VERSION ='2.6.23'
+elif [ -n "$(grep 'Ubuntu 18' /etc/issue 2> /dev/null)" ];then
+	OS=Ubuntu
+	Kernel_OS_VERSION='3.0'
+	apt install selinux-utils
+fi
 }
 
 function downloadinstall(){
