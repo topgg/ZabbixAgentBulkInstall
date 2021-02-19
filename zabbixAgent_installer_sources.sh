@@ -3,7 +3,9 @@
 configfile='/etc/zabbix/zabbix_agentd.conf'
 Server=$1 #Zabbix 服务器地址或者代理地址
 ServerActive=$1 #服务器地址或者代理地址或者代理地址
+if[ -n $2 ];then  #第二个位置写本机IP，对于多 IP 服务器需要指定,未指定则从网卡取
 ipaddr=`ip a | grep inet | grep -v inet6 | grep -v 127 | sed 's/^[ \t]*//g' | cut -d ' ' -f2|grep -E -o "([0-9]{1,3}\.){3}[0-9]{1,3}"`
+if
 rm -rf /etc/zabbix/zabbix_agentd.conf
 yum install pcre* -y # 解决源方式 二级制库缺失问题 源码安装 zabbix 报错总结 https://www.cnblogs.com/yanjieli/p/10736916.html
 
