@@ -118,6 +118,33 @@ function start(){
     /usr/sbin/zabbix_agentd -c $configfile #启动zabbix客户端 
 }
 
+### 注册服务
+
+function registerZABBIXtoservice(){
+cat<< EOF > /lib/systemd/system/zabbix-agent.service
+[Unit]
+Description=Zabbix Agent
+After=syslog.target
+After=network.target
+
+[Service]
+Environment="CONFFILE=/etc/zabbix/zabbix_agentd.conf"
+EnvironmentFile=-/etc/sysconfig/zabbix-agent
+Type=forking
+Restart=on-failure
+PIDFile=/run/zabbix/zabbix_agentd.pid
+KillMode=control-group
+ExecStart=/usr/sbin/zabbix_agentd -c \$CONFFILE
+ExecStop=/bin/kill -SIGTERM \$MAINPID
+RestartSec=10s
+User=zabbix
+Group=zabbix
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+}
 # 开机自动启动
 
 check
@@ -125,6 +152,7 @@ configurepermission
 downloadinstall
 configureconf $1
 openfirewall
+registerZABBIXtoservice
 start
 
 #启动检查
