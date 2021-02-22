@@ -3,12 +3,13 @@
 configfile='/etc/zabbix/zabbix_agentd.conf'
 Server=$1 #Zabbix 服务器地址或者代理地址
 ServerActive=$1 #服务器地址或者代理地址或者代理地址
-if[ -n $2 ]
-then  #第二个位置写本机IP，对于多 IP 服务器需要指定,未指定则从网卡取
-	ipaddr=`ifconfig | grep inet | grep -v inet6 | grep -v 127 | sed 's/^[ \t]*//g' | awk -F" " 'NR==1{print$2}'`
-else
+if [ -n "$2" ]
+then      
 	ipaddr=$2
-if
+else
+	echo "you have not input a word!系统自动获取本机IP" 
+	ipaddr=`ifconfig | grep inet | grep -v inet6 | grep -v 127 | sed 's/^[ \t]*//g' | awk -F" " 'NR==1{print$2}'`
+fi
 rm -rf /etc/zabbix/zabbix_agentd.conf
 yum install pcre* -y # 解决源方式 二级制库缺失问题 源码安装 zabbix 报错总结 https://www.cnblogs.com/yanjieli/p/10736916.html
 
