@@ -61,6 +61,7 @@ function configureconf(){
     sed -i "s/Server=127.0.0.1/Server=$server/g" $configfile
     sed -i "s/ServerActive=127.0.0.1/ServerActive=$server/g" $configfile
     sed -i "s/Hostname=Zabbix server/Hostname=$hostname/g" $configfile
+    echo 'PidFile=/var/run/zabbix/zabbix_agentd.pid' >>$configfile
     echo "zabbix	ALL=NOPASSWD: ALL" >> /etc/sudoers
     sed -i -r "s/Defaults(.*)requiretty/#Defaults		requiretty/g" /etc/sudoers
     if [ $? -eq 0 ] ; then
