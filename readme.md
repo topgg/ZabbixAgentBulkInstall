@@ -1,7 +1,7 @@
 
 ### Zabbix Agent 一键自动安装 脚本 Zabbix Agent one-click automatic installation script
 
-未来脚本分为两个版本，一个是 源码安装，一个是tar包安装，本次发布的是 tar包安装。
+一个是 源码安装，一个是tar包安装，本次发布的是 tar包安装。
 
 安装方式说明 
 ----------------------
