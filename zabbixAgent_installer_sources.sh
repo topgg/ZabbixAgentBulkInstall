@@ -88,6 +88,10 @@ function configurepermission(){
     useradd -g zabbix zabbix -s /sbin/nologin
     #新建zabbix用户并将其加入到zabbix组，并将他设置为不可登录的类型的用户。
     #下载
+    #设置pid 
+    mkdir /var/run/zabbix
+    chown zabbix.zabbix zabbix
+    chmod 0775 /var/run/zabbix
     mkdir ~/zabbix-agent
     mkdir /etc/zabbix/
     cd ~/zabbix-agent/zabbix-5.0.8/conf
