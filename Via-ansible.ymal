@@ -1,0 +1,5 @@
+hosts: web SMTP
+remote user: root
+task:
+      name: yum install nginx
+      
