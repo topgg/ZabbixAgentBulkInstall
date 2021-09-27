@@ -1,7 +1,9 @@
 
 ### Zabbix Agent 一键自动安装 脚本 Zabbix Agent one-click automatic installation script
 
-一个是 源码安装，一个是tar包安装，本次发布的是 tar包安装。
+一个是 源码安装，一个是tar包安装，本次发布的是 tar包安装，如果你用的是 jumpserver 其内置的批量执行模块无法直接使用 ansible 语句，可以尝试此方法。
+
+PS: 如果有调价，更好的解决方案是使用 ansible, 按照 ansible playbook 语法编写 zabbix 安装程序
 
 安装方式说明 
 ----------------------
